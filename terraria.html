@@ -47,24 +47,36 @@
 		}
 		/*сейчас начнутся цвета*/
 		.palitra{
-		position: absolute;
+		position: fixed;
 		display: block;
-		width: 10%;
+		width: 30%;
 		min-width: 100px;
 		right: 0px;
 		bottom: 0px;
 		padding: 5px;
 		background: #ddd;
 		color: #111;
-		border: 5px solid black;
-
+		border-top: 5px solid black;
+		border-left: 5px solid black;
+		padding-bottom: 10px;
 		}
 		.selectcolor {
 		width: 15px;
 		height: 15px;
-		margin-left: 10px;
-		margin-right: 10px;
+		margin-left: 5px;
+		margin-right: 5px;
 		border: 2px solid #555;
+		transition: 0.5s linear;
+		}
+		.selectcolorwhenselect {
+		width: 18px;
+		height: 18px;
+		margin-left: 5px;
+		margin-right: 5px;
+		border: 2px solid #000;
+		box-shadow: 0 0 10px #000;
+		transition: 0.5s linear;
+
 		}
 		.class1{
 		width: 50px;
@@ -91,6 +103,30 @@
 		background: #ff0;
 		border: 2px solid #000;
 		}
+		.class5{
+		width: 50px;
+		height: 50px;
+		background: #00f;
+		border: 2px solid #000;
+		}
+		.class6{
+		width: 50px;
+		height: 50px;
+		background: #0f0;
+		border: 2px solid #000;
+		}
+		.class7{
+		width: 50px;
+		height: 50px;
+		background: #f00;
+		border: 2px solid #000;
+		}
+		.class8{
+		width: 50px;
+		height: 50px;
+		background: #000;
+		border: 2px solid #000;
+		}
 		/*цвета закончились*/
 
 
@@ -113,9 +149,15 @@
 		<button onclick="generatefield()">создать</button></div>
 	 welcome to terraria creative</div>
 
-	<div class="palitra">выберите цвет
-	<div class="selectcolor" background-color="#0ff">1</div>
-
+	<div class="palitra">выберите цвет<br>
+	<div class="selectcolor" id="c1" onclick="changecolordrawing(id)" style='background-color: #fff'> </div>
+	<div class="selectcolor" id="c2" onclick="changecolordrawing(id)" style='background-color: #0ff'> </div>
+	<div class="selectcolor" id="c3" onclick="changecolordrawing(id)" style='background-color: #f0f'> </div>
+	<div class="selectcolor" id="c4" onclick="changecolordrawing(id)" style='background-color: #ff0'> </div>
+	<div class="selectcolor" id="c5" onclick="changecolordrawing(id)" style='background-color: #00f'> </div>
+	<div class="selectcolor" id="c6" onclick="changecolordrawing(id)" style='background-color: #0f0'> </div>
+	<div class="selectcolor" id="c7" onclick="changecolordrawing(id)" style='background-color: #f00'> </div>
+	<div class="selectcolor" id="c8" onclick="changecolordrawing(id)" style='background-color: #000'> </div>
 
 	</div>
 
@@ -123,15 +165,38 @@
 	<script type="text/javascript">
 		function changecolor(j) {
 			//alert(j);
+			let fuckinglenght = colorselected.length
+			if (fuckinglenght <= 4) {
+			colorselected = "class" + colorselected[1];
+
+			}
+
 			let thiss = document.getElementById(`${j}`);
-			if (thiss.className == "class1") {
-				thiss.className = "class2";
-			} else {
+			if (colorselected == thiss.className) {
 				thiss.className = "class1";
+			} else {
+				thiss.className = colorselected;
 
 			}
 		}
+		let colorselected = "c2";
 
+
+		function changecolordrawing(i){
+			let thiss = document.getElementById(`${i}`);
+			document.getElementById("c1").className = "selectcolor";
+			document.getElementById("c2").className = "selectcolor";
+			document.getElementById("c3").className = "selectcolor";
+			document.getElementById("c4").className = "selectcolor";
+			document.getElementById("c5").className = "selectcolor";
+			document.getElementById("c6").className = "selectcolor";
+			document.getElementById("c7").className = "selectcolor";
+			document.getElementById("c8").className = "selectcolor";
+
+			thiss.className = "selectcolorwhenselect"
+			colorselected = `${i}`;
+
+		}
 	</script>
 	<script type="text/javascript">
 		function generatefield() {
