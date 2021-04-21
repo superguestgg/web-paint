@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>terraria creative</title>
+	<style type="text/css">
+		body{
+		margin-top: 105px;
+		}
+		div {
+		display: inline-block;
+		}
+		input {
+		top: 0px;
+		position: relative;
+		width: 60%;
+		left: 0px;
+		top: -5px;
+		}
+		button{
+		width: 80px;
+		height: 20px;
+		margin-top: 5px;
+		color: #000;
+		background: #ddd;
+		border: 3px solid black;
+		position: relative;
+
+		top: -5px;
+		left: 0px;
+
+		}
+		.header{
+		position: fixed;
+		top: 0px;
+		height: 50px;
+		width: 100%;
+		left: 0px;
+		font-size: 30px;
+		border-bottom: 5px solid blue;
+		background: #ddd;
+		color: #000;
+		text-align: center;
+		padding-top: 15px;
+		z-index: 1000;
+		}
+		/*сейчас начнутся цвета*/
+		.palitra{
+		position: absolute;
+		display: block;
+		width: 10%;
+		min-width: 100px;
+		right: 0px;
+		bottom: 0px;
+		padding: 5px;
+		background: #ddd;
+		color: #111;
+		border: 5px solid black;
+
+		}
+		.selectcolor {
+		width: 15px;
+		height: 15px;
+		margin-left: 10px;
+		margin-right: 10px;
+		border: 2px solid #555;
+		}
+		.class1{
+		width: 50px;
+		height: 50px;
+		color: #000;
+		background: #fff;
+		border: 2px solid #000;
+		}
+		.class2{
+		width: 50px;
+		height: 50px;
+		background: #0ff;
+		border: 2px solid #000;
+		}
+		.class3{
+		width: 50px;
+		height: 50px;
+		background: #f0f;
+		border: 2px solid #000;
+		}
+		.class4{
+		width: 50px;
+		height: 50px;
+		background: #ff0;
+		border: 2px solid #000;
+		}
+		/*цвета закончились*/
+
+
+		.numberinput{
+		position: absolute;
+		width: 25%;
+		left: 20px;
+		top: 15px;
+		height: 30px;
+		border: 2px solid #888;
+		padding: 2px;
+		}
+
+	</style>
+</head>
+<body>
+
+	<div class="header">
+	<div class="numberinput"> <input type="text" name="me" id="me" value="1000">
+		<button onclick="generatefield()">создать</button></div>
+	 welcome to terraria creative</div>
+
+	<div class="palitra">выберите цвет
+	<div class="selectcolor" background-color="#0ff">1</div>
+
+
+	</div>
+
+
+	<script type="text/javascript">
+		function changecolor(j) {
+			//alert(j);
+			let thiss = document.getElementById(`${j}`);
+			if (thiss.className == "class1") {
+				thiss.className = "class2";
+			} else {
+				thiss.className = "class1";
+
+			}
+		}
+
+	</script>
+	<script type="text/javascript">
+		function generatefield() {
+			let n = document.getElementById("me").value
+			let g = ""
+			for (let i = 0; i <= n; i++) {
+				g = g + '<div id="' + i + '" class="class1" onclick="changecolor(id)">' + i + '</div>'
+
+			}
+			document.getElementById("bod").innerHTML = g
+
+		}
+
+	</script>
+	<div id="bod"></div>
+	
+</body>
+</html>
