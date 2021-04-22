@@ -12,20 +12,23 @@
 		display: inline-block;
 		}
 		input {
-		top: 0px;
+
 		position: relative;
-		width: 60%;
-		left: 0px;
-		top: -5px;
 		}
 		button{
-		width: 80px;
-		height: 20px;
-		margin-top: 5px;
+		width: 35%;
+		min-width: 50px;
+		height: 40px;
 		color: #000;
-		background: #ddd;
-		border: 3px solid black;
+		margin-top: 5px;
 		position: relative;
+		background: #ddd;
+		border-left: 9px double #888;
+		border-right: none;
+		border-top: none;
+		border-bottom: none;
+		right: 0px;
+
 
 		top: -5px;
 		left: 0px;
@@ -44,6 +47,15 @@
 		text-align: center;
 		padding-top: 15px;
 		z-index: 1000;
+		}
+		.countinput{
+		width: 60%;
+		min-width: 50px;
+		left: 0px;
+		top: -5px;
+		height: 35px;
+		position: relative;
+
 		}
 		/*сейчас начнутся цвета*/
 		.palitra{
@@ -78,10 +90,17 @@
 		transition: 0.5s linear;
 
 		}
+		.class0{
+		width: 50px;
+		height: 50px;
+		color: #555;
+		
+		border: 2px solid #000;
+		}
 		.class1{
 		width: 50px;
 		height: 50px;
-		color: #000;
+		color: #555;
 		background: #fff;
 		border: 2px solid #000;
 		}
@@ -127,17 +146,36 @@
 		background: #000;
 		border: 2px solid #000;
 		}
+		.mypalitra{
+		background-color: #ccc;
+		display: inline-block;
+		border: 2px solid #555;
+		padding: 2px;
+		margin-top: 3px;
+		margin-bottom: 3px;
+		margin-left: 3px;
+		margin-right: 3px;
+
+
+		}
+		.forrange{
+		width: 50px;
+		height: 10px;
+		border: 3px solid;
+
+		}
+
 		/*цвета закончились*/
 
 
 		.numberinput{
 		position: absolute;
 		width: 25%;
-		left: 20px;
-		top: 15px;
-		height: 30px;
+		left: 10px;
+		top: 10px;
+		height: 40px;
 		border: 2px solid #888;
-		padding: 2px;
+		padding: 0px;
 		}
 
 	</style>
@@ -145,13 +183,13 @@
 <body>
 
 	<div class="header">
-	<div class="numberinput"> <input type="text" name="me" id="me" value="1000">
+	<div class="numberinput"> <input type="text" name="me" id="me" value="1000" class="countinput">
 		<button onclick="generatefield()">создать</button></div>
 	 welcome to terraria creative</div>
 
 	<div class="palitra">выберите цвет<br>
 	<div class="selectcolor" id="c1" onclick="changecolordrawing(id)" style='background-color: #fff'> </div>
-	<div class="selectcolor" id="c2" onclick="changecolordrawing(id)" style='background-color: #0ff'> </div>
+	<div class="selectcolorwhenselect" id="c2" onclick="changecolordrawing(id)" style='background-color: #0ff'> </div>
 	<div class="selectcolor" id="c3" onclick="changecolordrawing(id)" style='background-color: #f0f'> </div>
 	<div class="selectcolor" id="c4" onclick="changecolordrawing(id)" style='background-color: #ff0'> </div>
 	<div class="selectcolor" id="c5" onclick="changecolordrawing(id)" style='background-color: #00f'> </div>
@@ -159,13 +197,51 @@
 	<div class="selectcolor" id="c7" onclick="changecolordrawing(id)" style='background-color: #f00'> </div>
 	<div class="selectcolor" id="c8" onclick="changecolordrawing(id)" style='background-color: #000'> </div>
 
+	<div class="mypalitra">моя палитра
+		red<input type="range" id="range1" class="forrange" name="mypalitranameofinput" min="0" max="16" step="1" value="0" oninput="getcolor(id)">
+		green<input type="range" id="range2" class="forrange" name="mypalitranameofinput" min="0" max="16" step="1" value="0"  oninput="getcolor(id)">
+		blue<input type="range" id="range3" class="forrange" name="mypalitranameofinput" min="0" max="16" step="1" value="0"  oninput="getcolor(id)">
+		<div class="selectcolor" id="c0" onclick="changecolordrawing(id)" style='background-image: linear-gradient( to left, #000, #fff)'> </div>
+	</div>
 	</div>
 
 
 	<script type="text/javascript">
+		let all = "#000"
+		function getcolor(i) {
+			let range1 = document.getElementById("range1").value
+			let range2 = document.getElementById("range2").value
+			let range3 = document.getElementById("range3").value
+
+			let color1 = readycolor(range1)
+			let color2 = readycolor(range2)
+			let color3 = readycolor(range3)
+			all = `#${color1}${color2}${color3}`
+			document.getElementById("c0").style = `background-color: ${all}`;
+		}
+		function readycolor(o) {
+			if (o == 16) {
+				o="f";
+			} else if (o == 15) {
+				o = "f";
+			}else if (o == 14) {
+				o = "e";
+			}else if (o == 13) {
+				o = "d";
+			}else if (o == 12) {
+				o = "c";
+			}else if (o == 11) {
+				o = "b";
+			}else if (o == 10) {
+				o = "a";
+			}
+			return o;
+		}
+
+
 		function changecolor(j) {
 			//alert(j);
-			let fuckinglenght = colorselected.length
+			let fuckinglenght = colorselected.length;
 			if (fuckinglenght <= 4) {
 			colorselected = "class" + colorselected[1];
 
@@ -176,8 +252,13 @@
 				thiss.className = "class1";
 			} else {
 				thiss.className = colorselected;
-
+			} 
+			if (colorselected == "class0") {
+				thiss.style = `background-color: ${all}`;
+				thiss.className = "class0";
 			}
+
+			
 		}
 		let colorselected = "c2";
 
@@ -192,8 +273,9 @@
 			document.getElementById("c6").className = "selectcolor";
 			document.getElementById("c7").className = "selectcolor";
 			document.getElementById("c8").className = "selectcolor";
-
-			thiss.className = "selectcolorwhenselect"
+			document.getElementById("c0").className = "selectcolor";
+			document.getElementById("c0").style = `background-color: ${all}`;
+			thiss.className = "selectcolorwhenselect";
 			colorselected = `${i}`;
 
 		}
