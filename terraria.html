@@ -17,7 +17,7 @@
 		}
 		button{
 		width: 35%;
-		min-width: 50px;
+		min-width: 77px;
 		height: 40px;
 		color: #000;
 		margin-top: 5px;
@@ -63,6 +63,7 @@
 		display: block;
 		width: 30%;
 		min-width: 100px;
+		max-width: 100%;
 		right: 0px;
 		bottom: 0px;
 		padding: 5px;
@@ -95,56 +96,56 @@
 		height: 50px;
 		color: #555;
 		
-		border: 2px solid #000;
+		border: 1px solid #000;
 		}
 		.class1{
 		width: 50px;
 		height: 50px;
 		color: #555;
 		background: #fff;
-		border: 2px solid #000;
+		border: 1px solid #000;
 		}
 		.class2{
 		width: 50px;
 		height: 50px;
 		background: #0ff;
-		border: 2px solid #000;
+		border: 1px solid #000;
 		}
 		.class3{
 		width: 50px;
 		height: 50px;
 		background: #f0f;
-		border: 2px solid #000;
+		border: 1px solid #000;
 		}
 		.class4{
 		width: 50px;
 		height: 50px;
 		background: #ff0;
-		border: 2px solid #000;
+		border: 1px solid #000;
 		}
 		.class5{
 		width: 50px;
 		height: 50px;
 		background: #00f;
-		border: 2px solid #000;
+		border: 1px solid #000;
 		}
 		.class6{
 		width: 50px;
 		height: 50px;
 		background: #0f0;
-		border: 2px solid #000;
+		border: 1px solid #000;
 		}
 		.class7{
 		width: 50px;
 		height: 50px;
 		background: #f00;
-		border: 2px solid #000;
+		border: 1px solid #000;
 		}
 		.class8{
 		width: 50px;
 		height: 50px;
 		background: #000;
-		border: 2px solid #000;
+		border: 1px solid #000;
 		}
 		.mypalitra{
 		background-color: #ccc;
@@ -185,7 +186,7 @@
 	<div class="header">
 	<div class="numberinput"> <input type="text" name="me" id="me" value="1000" class="countinput">
 		<button onclick="generatefield()">создать</button></div>
-	 welcome to terraria creative</div>
+	 terraria creative</div>
 
 	<div class="palitra">выберите цвет<br>
 	<div class="selectcolor" id="c1" onclick="changecolordrawing(id)" style='background-color: #fff'> </div>
@@ -248,10 +249,17 @@
 			}
 
 			let thiss = document.getElementById(`${j}`);
+			thiss.style = "background-color: none";
 			if (colorselected == thiss.className) {
 				thiss.className = "class1";
+			} else if (thiss.className == "class0") {
+				thiss.style = "background-color: none";
+				thiss.className = colorselected;
+	/*			colorthis = window.colorselected.backgroundColor;
+				alert(colorthis);*/
 			} else {
 				thiss.className = colorselected;
+
 			} 
 			if (colorselected == "class0") {
 				thiss.style = `background-color: ${all}`;
@@ -284,7 +292,7 @@
 		function generatefield() {
 			let n = document.getElementById("me").value
 			let g = ""
-			for (let i = 0; i <= n; i++) {
+			for (let i = 1; i <= n; i++) {
 				g = g + '<div id="' + i + '" class="class1" onclick="changecolor(id)">' + i + '</div>'
 
 			}
