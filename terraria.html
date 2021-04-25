@@ -7,6 +7,13 @@
 	<style type="text/css">
 		body{
 		margin-top: 105px;
+		padding: 0px;
+		font-size: 0px;
+		}
+		p{
+		font-size: 15px;
+		text-align: center;
+		margin: 0px;
 		}
 		div {
 		display: inline-block;
@@ -16,21 +23,19 @@
 		position: relative;
 		}
 		button{
-		width: 35%;
+		width: 25%;
 		min-width: 77px;
-		height: 40px;
+		height: 20px;
 		color: #000;
-		margin-top: 5px;
+		/*margin-top: -50px;*/
 		position: relative;
-		background: #ddd;
-		border-left: 9px double #888;
+		background: #ccc;
+		border-left: 5px double #888;
 		border-right: none;
 		border-top: none;
 		border-bottom: none;
 		right: 0px;
-
-
-		top: -5px;
+		top: -11px;
 		left: 0px;
 
 		}
@@ -49,16 +54,17 @@
 		z-index: 1000;
 		}
 		.countinput{
-		width: 60%;
+		width: 30%;
 		min-width: 50px;
 		left: 0px;
-		top: -5px;
-		height: 35px;
+		top: -10px;
+		height: 15px;
 		position: relative;
 
 		}
 		/*сейчас начнутся цвета*/
 		.palitra{
+		font-size: medium;
 		position: fixed;
 		display: block;
 		width: 30%;
@@ -91,62 +97,7 @@
 		transition: 0.5s linear;
 
 		}
-		.class0{
-		width: 50px;
-		height: 50px;
-		color: #555;
 		
-		border: 1px solid #000;
-		}
-		.class1{
-		width: 50px;
-		height: 50px;
-		color: #555;
-		background: #fff;
-		border: 1px solid #000;
-		}
-		.class2{
-		width: 50px;
-		height: 50px;
-		background: #0ff;
-		border: 1px solid #000;
-		}
-		.class3{
-		width: 50px;
-		height: 50px;
-		background: #f0f;
-		border: 1px solid #000;
-		}
-		.class4{
-		width: 50px;
-		height: 50px;
-		background: #ff0;
-		border: 1px solid #000;
-		}
-		.class5{
-		width: 50px;
-		height: 50px;
-		background: #00f;
-		border: 1px solid #000;
-		}
-		.class6{
-		width: 50px;
-		height: 50px;
-		background: #0f0;
-		border: 1px solid #000;
-		}
-		.class7{
-		width: 50px;
-		height: 50px;
-		background: #f00;
-		border: 1px solid #000;
-		}
-		.class8{
-		width: 50px;
-		height: 50px;
-		background: #000;
-		border: 1px solid #000;
-		}
 		.mypalitra{
 		background-color: #ccc;
 		display: inline-block;
@@ -171,21 +122,120 @@
 
 		.numberinput{
 		position: absolute;
-		width: 25%;
-		left: 10px;
-		top: 10px;
-		height: 40px;
+		width: 30%;
+		left: 5px;
+		top: 5px;
+		height: 50px;
+		background: #ddd;
 		border: 2px solid #888;
 		padding: 0px;
 		}
+		.bod{
+		font-size: 0px;
+		}
 
 	</style>
+	<script type="text/javascript">
+		function generatefield() {
+			let notmatter = getside()
+			let n = (document.getElementById("me").value) * (document.getElementById("sum").value)
+			let g = ""
+			const screenwidth = window.screen.width;
+			let side = (screenwidth - 24) / sum - 2;
+
+			for (let i = 1; i <= n; i++) {
+				g = g + '<div id="' + i + '" class="class1" onclick="changecolor(id)" onmousedown="startlongdrawing(id)" onmouseup="endlongdrawing(id)" onmouseover="longdrawing(id)">' + '</div>';
+
+				}
+		
+			document.getElementById("bod").innerHTML = g
+
+		}
+
+	</script>
+	<script type="text/javascript">
+		function getside(){
+			const screenwidth = window.screen.width;
+			sum = document.getElementById("sum").value;
+			let side = (screenwidth - 22) / sum - 2;
+			head = document.head;
+			let borderofcell = "1px solid #000;";
+			(side < 5) ? (borderofcell = "0px") : (borderofcell = "1px solid #000;");
+			styleofclasses = document.createElement("style");
+			styleofclasses.innerHTML = `.class0{
+		width: ${side}px;
+		height: ${side}px;
+		color: #555;		
+		border: ${borderofcell};
+		}
+		.class1{
+		width: ${side}px;
+		height: ${side}px;
+		color: #555;
+		background: #fff;
+		border: ${borderofcell};
+		}
+		.class2{
+		width: ${side}px;
+		height: ${side}px;
+		background: #0ff;
+		color: #555;
+		border: ${borderofcell};
+		}
+		.class3{
+		width: ${side}px;
+		height: ${side}px;
+		background: #f0f;
+		border: ${borderofcell};
+		color: #555;
+		}
+		.class4{
+		width: ${side}px;
+		height: ${side}px;
+		background: #ff0;
+		border: ${borderofcell};
+		color: #555;
+		}
+		.class5{
+		width: ${side}px;
+		height: ${side}px;
+		background: #00f;
+		border: ${borderofcell};
+		color: #555;
+		}
+		.class6{
+		width: ${side}px;
+		height: ${side}px;
+		background: #0f0;
+		border: ${borderofcell};
+		color: #555;
+		}
+		.class7{
+		width: ${side}px;
+		height: ${side}px;
+		background: #f00;
+		border: ${borderofcell};
+		color: #555;
+		}
+		.class8{
+		width: ${side}px;
+		height: ${side}px;
+		background: #000;
+		border: ${borderofcell};
+		color: #555;
+		}`
+		document.head.append(styleofclasses)
+		}
+	</script>
 </head>
 <body>
 
 	<div class="header">
-	<div class="numberinput"> <input type="text" name="me" id="me" value="1000" class="countinput">
-		<button onclick="generatefield()">создать</button></div>
+	<div class="numberinput"> <p>высота||ширина</p>
+		<input type="text" name="me" id="me" value="100" class="countinput">
+		<input type="text" name="sum" id="sum" value="10" class="countinput">
+		<button onclick="generatefield()">создать</button>
+	</div>
 	 terraria creative</div>
 
 	<div class="palitra">выберите цвет<br>
@@ -202,7 +252,7 @@
 		red<input type="range" id="range1" class="forrange" name="mypalitranameofinput" min="0" max="16" step="1" value="0" oninput="getcolor(id)">
 		green<input type="range" id="range2" class="forrange" name="mypalitranameofinput" min="0" max="16" step="1" value="0"  oninput="getcolor(id)">
 		blue<input type="range" id="range3" class="forrange" name="mypalitranameofinput" min="0" max="16" step="1" value="0"  oninput="getcolor(id)">
-		<div class="selectcolor" id="c0" onclick="changecolordrawing(id)" style='background-image: linear-gradient( to left, #000, #fff)'> </div>
+		<div class="selectcolor" id="c0" onclick="changecolordrawing(id)" style='background-image: linear-gradient( to left top, #000, #fff)'> </div>
 	</div>
 	</div>
 
@@ -238,7 +288,19 @@
 			}
 			return o;
 		}
-
+		let longdrawingnow = 0;
+		function startlongdrawing(id) {
+			longdrawingnow = 1;
+			
+		}
+		function endlongdrawing(id) {
+			longdrawingnow = 0;
+		}
+		function longdrawing(id) {
+			if (longdrawingnow == 1) {
+				let notmatter = changecolor(id);
+}
+		}
 
 		function changecolor(j) {
 			//alert(j);
@@ -288,20 +350,8 @@
 
 		}
 	</script>
-	<script type="text/javascript">
-		function generatefield() {
-			let n = document.getElementById("me").value
-			let g = ""
-			for (let i = 1; i <= n; i++) {
-				g = g + '<div id="' + i + '" class="class1" onclick="changecolor(id)">' + i + '</div>'
-
-			}
-			document.getElementById("bod").innerHTML = g
-
-		}
-
-	</script>
-	<div id="bod"></div>
+	
+	<div id="bod" style="border: 1px solid black"></div>
 	
 </body>
 </html>
