@@ -140,11 +140,11 @@
 			let notmatter = getside()
 			let n = (document.getElementById("me").value) * (document.getElementById("sum").value)
 			let g = ""
-			const screenwidth = window.screen.width;
-			let side = (screenwidth - 24) / sum - 2;
+			/*const screenwidth = window.screen.width;
+			let side = (screenwidth - 24) / sum - 2;*/
 
 			for (let i = 1; i <= n; i++) {
-				g = g + '<div id="' + i + '" class="class1" onclick="changecolor(id)" onmousedown="startlongdrawing(id)" onmouseup="endlongdrawing(id)" onmouseover="longdrawing(id)">' + '</div>';
+				g = g + '<div id="' + i + '" class="class1" onmousedown="startlongdrawing(id)" onmouseup="endlongdrawing(id)" onmouseover="longdrawing(id)">' + '</div>';
 
 				}
 		
@@ -156,11 +156,13 @@
 	<script type="text/javascript">
 		function getside(){
 			const screenwidth = window.screen.width;
+			const screenwidth2 = document.getElementById("bod").clientWidth;
+
 			sum = document.getElementById("sum").value;
-			let side = (screenwidth - 22) / sum - 2;
+			let side = (screenwidth2) / sum - 2;
 			head = document.head;
-			let borderofcell = "1px solid #000;";
-			(side < 5) ? (borderofcell = "0px") : (borderofcell = "1px solid #000;");
+			let borderofcell = "0px;";
+			(side < 5) ? (side = (screenwidth2 + 2) / sum) : (borderofcell = "1px solid #000;");
 			styleofclasses = document.createElement("style");
 			styleofclasses.innerHTML = `.class0{
 		width: ${side}px;
@@ -232,27 +234,27 @@
 
 	<div class="header">
 	<div class="numberinput"> <p>высота||ширина</p>
-		<input type="text" name="me" id="me" value="100" class="countinput">
-		<input type="text" name="sum" id="sum" value="10" class="countinput">
+		<input type="text" name="me" id="me" value="100" class="countinput" onkeydown="generatefield()">
+		<input type="text" name="sum" id="sum" value="10" class="countinput" onkeydown="generatefield()">
 		<button onclick="generatefield()">создать</button>
 	</div>
 	 terraria creative</div>
 
 	<div class="palitra">выберите цвет<br>
-	<div class="selectcolor" id="c1" onclick="changecolordrawing(id)" style='background-color: #fff'> </div>
-	<div class="selectcolorwhenselect" id="c2" onclick="changecolordrawing(id)" style='background-color: #0ff'> </div>
-	<div class="selectcolor" id="c3" onclick="changecolordrawing(id)" style='background-color: #f0f'> </div>
-	<div class="selectcolor" id="c4" onclick="changecolordrawing(id)" style='background-color: #ff0'> </div>
-	<div class="selectcolor" id="c5" onclick="changecolordrawing(id)" style='background-color: #00f'> </div>
-	<div class="selectcolor" id="c6" onclick="changecolordrawing(id)" style='background-color: #0f0'> </div>
-	<div class="selectcolor" id="c7" onclick="changecolordrawing(id)" style='background-color: #f00'> </div>
-	<div class="selectcolor" id="c8" onclick="changecolordrawing(id)" style='background-color: #000'> </div>
+	<div class="selectcolor" id="s1" onclick="changecolordrawing(id)" style='background-color: #fff'> </div>
+	<div class="selectcolorwhenselect" id="s2" onclick="changecolordrawing(id)" style='background-color: #0ff'> </div>
+	<div class="selectcolor" id="s3" onclick="changecolordrawing(id)" style='background-color: #f0f'> </div>
+	<div class="selectcolor" id="s4" onclick="changecolordrawing(id)" style='background-color: #ff0'> </div>
+	<div class="selectcolor" id="s5" onclick="changecolordrawing(id)" style='background-color: #00f'> </div>
+	<div class="selectcolor" id="s6" onclick="changecolordrawing(id)" style='background-color: #0f0'> </div>
+	<div class="selectcolor" id="s7" onclick="changecolordrawing(id)" style='background-color: #f00'> </div>
+	<div class="selectcolor" id="s8" onclick="changecolordrawing(id)" style='background-color: #000'> </div>
 
 	<div class="mypalitra">моя палитра
 		red<input type="range" id="range1" class="forrange" name="mypalitranameofinput" min="0" max="16" step="1" value="0" oninput="getcolor(id)">
 		green<input type="range" id="range2" class="forrange" name="mypalitranameofinput" min="0" max="16" step="1" value="0"  oninput="getcolor(id)">
 		blue<input type="range" id="range3" class="forrange" name="mypalitranameofinput" min="0" max="16" step="1" value="0"  oninput="getcolor(id)">
-		<div class="selectcolor" id="c0" onclick="changecolordrawing(id)" style='background-image: linear-gradient( to left top, #000, #fff)'> </div>
+		<div class="selectcolor" id="s0" onclick="changecolordrawing(id)" style='background-image: linear-gradient( to left top, #000, #fff)'> </div>
 	</div>
 	</div>
 
@@ -268,7 +270,7 @@
 			let color2 = readycolor(range2)
 			let color3 = readycolor(range3)
 			all = `#${color1}${color2}${color3}`
-			document.getElementById("c0").style = `background-color: ${all}`;
+			document.getElementById("s0").style = `background-color: ${all}`;
 		}
 		function readycolor(o) {
 			if (o == 16) {
@@ -291,24 +293,18 @@
 		let longdrawingnow = 0;
 		function startlongdrawing(id) {
 			longdrawingnow = 1;
-			
+			let notmatter = changecolor(id);
 		}
 		function endlongdrawing(id) {
 			longdrawingnow = 0;
 		}
 		function longdrawing(id) {
 			if (longdrawingnow == 1) {
-				let notmatter = changecolor(id);
+				let notmatter = changecolor2(id);
 }
 		}
 
 		function changecolor(j) {
-			//alert(j);
-			let fuckinglenght = colorselected.length;
-			if (fuckinglenght <= 4) {
-			colorselected = "class" + colorselected[1];
-
-			}
 
 			let thiss = document.getElementById(`${j}`);
 			thiss.style = "background-color: none";
@@ -330,28 +326,43 @@
 
 			
 		}
-		let colorselected = "c2";
+		function changecolor2(j) {
+
+			let thiss = document.getElementById(`${j}`);
+			thiss.style = "background-color: none";
+
+			thiss.className = colorselected;
+			
+			if (colorselected == "class0") {
+				thiss.style = `background-color: ${all}`;
+			}
+
+			
+		}
+		let colorselected = "class2";
 
 
 		function changecolordrawing(i){
 			let thiss = document.getElementById(`${i}`);
-			document.getElementById("c1").className = "selectcolor";
-			document.getElementById("c2").className = "selectcolor";
-			document.getElementById("c3").className = "selectcolor";
-			document.getElementById("c4").className = "selectcolor";
-			document.getElementById("c5").className = "selectcolor";
-			document.getElementById("c6").className = "selectcolor";
-			document.getElementById("c7").className = "selectcolor";
-			document.getElementById("c8").className = "selectcolor";
-			document.getElementById("c0").className = "selectcolor";
-			document.getElementById("c0").style = `background-color: ${all}`;
+			document.getElementById("s1").className = "selectcolor";
+			document.getElementById("s2").className = "selectcolor";
+			document.getElementById("s3").className = "selectcolor";
+			document.getElementById("s4").className = "selectcolor";
+			document.getElementById("s5").className = "selectcolor";
+			document.getElementById("s6").className = "selectcolor";
+			document.getElementById("s7").className = "selectcolor";
+			document.getElementById("s8").className = "selectcolor";
+			document.getElementById("s0").className = "selectcolor";
+			document.getElementById("s0").style = `background-color: ${all}`;
 			thiss.className = "selectcolorwhenselect";
-			colorselected = `${i}`;
+			colorselected = `clas${i}`;
 
 		}
 	</script>
 	
-	<div id="bod" style="border: 1px solid black"></div>
+	<div id="bod" style="border: 1px solid black; 
+	min-height: 2000px;
+	width: 100%;"></div>
 	
 </body>
 </html>
