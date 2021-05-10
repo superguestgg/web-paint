@@ -4,6 +4,7 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>terraria creative</title>
+	<link rel="shortcut icon" href="https://lh3.google.com/u/0/d/1eXbawcwyH6X_BOVj8hIN5BHluailLIys=w1920-h867-iv1" type="image/png">
 	<style type="text/css">
 		body{
 		margin-top: 105px;
@@ -316,12 +317,19 @@
 	/*			colorthis = window.colorselected.backgroundColor;
 				alert(colorthis);*/
 			} else {
+				thiss.style = "background-color: none";
+
 				thiss.className = colorselected;
 
 			} 
 			if (colorselected == "class0") {
+				if (thiss.style == `background-color: ${all}`){
+					thiss.style = "background-color: none";
+					thiss.className = "class1";
+				} else {
 				thiss.style = `background-color: ${all}`;
 				thiss.className = "class0";
+				}
 			}
 
 			
