@@ -134,12 +134,65 @@
 		.bod{
 		font-size: 0px;
 		}
+		.modecellinput{
+		position: absolute;
+		width: 20%;
+		right: 5px;
+		top: 5px;
+		height: 50px;
+		background: #ddd;
+		border: 2px solid #888;
+		padding: 0px;
+		font-size: 20px;		
+		}
+		.copypastemenu{
+		font-size: medium;
+		position: fixed;
+		display: block;
+		width: 30%;
+		min-width: 100px;
+		max-width: 100%;
+		left: 0px;
+		bottom: 0px;
+		padding: 5px;
+		background: #ddd;
+		color: #111;
+		border-top: 4px solid black;
+		border-right: 4px solid black;
+		padding-bottom: 10px;
+		}
+		.copypastebutton{
+		font-size: medium;
+		display: block;
+		width: 90%;
+		min-width: 90px;
 
+		padding: 5px;
+		background: #ddd;
+		color: #111;
+		border-bottom: 2px solid grey;
+		padding-bottom: 4px;
+		}
 	</style>
 	<script type="text/javascript">
+		function copyimg(){
+			let n=(document.getElementById("me").value) * (document.getElementById("sum").value)
+			let copythis = "";
+			copythis += `${(document.getElementById("me").value)} ${(document.getElementById("sum").value)}`;
+			copythis += "_";
+			for (let i=1; i<=n;i++){
+				copythis+=document.getElementById(i).className+" "+document.getElementById(i).style.backgroundColor+"_";
+			}
+			navigator.clipboard.writeText(copythis);
+		}
+		function pasteimg(){
+			let thiss=document.getElementById("textarea").value;
+			
+			document.getElementById("bod").innerHTML=`${thiss}`;
+		}
 		function generatefield() {
-			let notmatter = getside()
-			let n = (document.getElementById("me").value) * (document.getElementById("sum").value)
+			let notmatter = getside();
+			let n = (document.getElementById("me").value) * (document.getElementById("sum").value);
 			let g = ""
 			/*const screenwidth = window.screen.width;
 			let side = (screenwidth - 24) / sum - 2;*/
@@ -163,7 +216,7 @@
 			let side = (screenwidth2) / sum - 2;
 			head = document.head;
 			let borderofcell = "0px;";
-			(side < 5) ? (side = (screenwidth2 + 2) / sum) : (borderofcell = "1px solid #000;");
+			(cellmodenow == "without") ? (side = (screenwidth2) / sum) : (borderofcell = "1px solid #000;");
 			styleofclasses = document.createElement("style");
 			styleofclasses.innerHTML = `.class0{
 		width: ${side}px;
@@ -239,7 +292,15 @@
 		<input type="text" name="sum" id="sum" value="10" class="countinput" onkeydown="generatefield()">
 		<button onclick="generatefield()">создать</button>
 	</div>
+	<div class="modecellinput" onclick="changecellmode()" id="modecellinput">
+		с границами
+	</div>
 	 terraria creative</div>
+	<div class="copypastemenu">
+		<div class="copypastebutton" onclick="copyimg()">копировать изображение</div>
+	<div class="copypastebutton" onclick="pasteimg()">вставить изображение</div><textarea id="textarea"></textarea>
+</div>
+
 
 	<div class="palitra">выберите цвет<br>
 	<div class="selectcolor" id="s1" onclick="changecolordrawing(id)" style='background-color: #fff'> </div>
@@ -262,6 +323,17 @@
 
 	<script type="text/javascript">
 		let all = "#000"
+		let cellmodenow = "with"
+		function changecellmode(){
+			if (cellmodenow=="with"){
+				cellmodenow="without";
+				document.getElementById("modecellinput").innerHTML="без границ";
+			} else {
+				cellmodenow="with";
+				document.getElementById("modecellinput").innerHTML="с границами";
+
+			}
+		}
 		function getcolor(i) {
 			let range1 = document.getElementById("range1").value
 			let range2 = document.getElementById("range2").value
@@ -370,7 +442,7 @@
 	
 	<div id="bod" style="border: 1px solid black; 
 	min-height: 2000px;
-	width: 100%;"></div>
+	width: 100%; font-size: 100px;" ></div>
 	
 </body>
 </html>
