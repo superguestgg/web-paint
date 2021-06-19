@@ -189,6 +189,16 @@
 			let thiss=document.getElementById("textarea").value;
 			
 			document.getElementById("bod").innerHTML=`${thiss}`;
+			thiss=thiss.split("_")
+			document.getElementById("me").value=((thiss[0]).split(" "))[0];
+			document.getElementById("sum").value=((thiss[0]).split(" "))[1];
+			generatefield();
+			let n=(document.getElementById("me").value) * (document.getElementById("sum").value)
+
+			for (let i=1; i<=n;i++){
+				document.getElementById(i).style.backgroundColor=((thiss[i]).split(" "))[1];
+				document.getElementById(i).className=((thiss[i]).split(" "))[0];
+			}
 		}
 		function generatefield() {
 			let notmatter = getside();
@@ -442,7 +452,7 @@
 	
 	<div id="bod" style="border: 1px solid black; 
 	min-height: 2000px;
-	width: 100%; font-size: 100px;" ></div>
+	width: 100%; font-size: 0px;" ></div>
 	
 </body>
 </html>
