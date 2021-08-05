@@ -178,10 +178,10 @@
 		function copyimg(){
 			let n=(document.getElementById("me").value) * (document.getElementById("sum").value)
 			let copythis = "";
-			copythis += `${(document.getElementById("me").value)} ${(document.getElementById("sum").value)}`;
-			copythis += "_";
+			copythis += `${(document.getElementById("me").value)}_${(document.getElementById("sum").value)}`;
+			copythis += "|";
 			for (let i=1; i<=n;i++){
-				copythis+=document.getElementById(i).className+" "+document.getElementById(i).style.backgroundColor+"_";
+				copythis+=(document.getElementById(i).className).replace("class","")+"_"+(document.getElementById(i).style.backgroundColor).replace("rgb(","")+"|";
 			}
 			navigator.clipboard.writeText(copythis);
 		}
@@ -189,15 +189,19 @@
 			let thiss=document.getElementById("textarea").value;
 			
 			document.getElementById("bod").innerHTML=`${thiss}`;
-			thiss=thiss.split("_")
-			document.getElementById("me").value=((thiss[0]).split(" "))[0];
-			document.getElementById("sum").value=((thiss[0]).split(" "))[1];
+			thiss=thiss.split("|")
+			document.getElementById("me").value=((thiss[0]).split("_"))[0];
+			document.getElementById("sum").value=((thiss[0]).split("_"))[1];
 			generatefield();
 			let n=(document.getElementById("me").value) * (document.getElementById("sum").value)
 
 			for (let i=1; i<=n;i++){
-				document.getElementById(i).style.backgroundColor=((thiss[i]).split(" "))[1];
-				document.getElementById(i).className=((thiss[i]).split(" "))[0];
+				document.getElementById(i).className="class"+((thiss[i]).split("_"))[0];
+				if (document.getElementById(i).className=="class0"){
+					//alert(((thiss[i]).split("_"))[1])
+					document.getElementById(i).style="background-color: rgb("+((thiss[i]).split("_"))[1];
+				}
+
 			}
 		}
 		function generatefield() {
