@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>TableEditor</title>
+	<link rel="shortcut icon" href="https://lh3.google.com/u/0/d/1eXbawcwyH6X_BOVj8hIN5BHluailLIys=w1920-h867-iv1" type="image/png">
+	<style type="text/css">
+		body{
+		margin-top: 105px;
+		padding: 0px;
+		font-size: 0px;
+		}
+		p{
+		font-size: 15px;
+		text-align: center;
+		margin: 0px;
+		}
+		div {
+		display: inline-block;
+		}
+		input {
+
+		position: relative;
+		}
+		button{
+		width: 25%;
+		min-width: 77px;
+		height: 20px;
+		color: #000;
+		/*margin-top: -50px;*/
+		position: relative;
+		background: #ccc;
+		border-left: 5px double #888;
+		border-right: none;
+		border-top: none;
+		border-bottom: none;
+		right: 0px;
+		top: -11px;
+		left: 0px;
+
+		}
+		.bod{
+		width: 70%;
+		margin-left: 20px;
+		margin-top: 10%;
+		font-size: 20px;
+		border-radius: 10px;
+		}
+		table{
+		background-color: #88f;
+		font-size: 25px;
+		border-radius: 10px;
+		border: 5px solid blue;
+		border-collapse: collapse;
+		padding: 5px;
+		}
+		th{
+		font-size: 30px;
+		border: 2px solid blue;
+		border-bottom: 8px solid black;
+		padding: 10px;
+		}
+		td{
+		border: 2px solid grey;
+		border-right: 4px solid black;
+		padding: 5px;
+		}
+		.createnewcolumnbutton{
+		width: 10px;
+		height: 10px;
+		background-color: #8f8;
+		color: #fff;
+
+		}
+	</style>
+	<script type="text/javascript">
+		let columncount=3;
+		let linecount=2;
+		let headers=["1столбец","2столбец","3столбец"];
+		let alllines=[["111","122","133"],["211","222","233"]];
+		function startwork(){
+			//thiss=document.getElementById("bod").innerHTML;
+
+		}
+		function createnewcolumn(){
+			columncount++;
+			document.getElementById(columncount+"_0").innerHTML="new column name";
+			headers.push("new column name");
+			document.getElementById("0_0").innerHTML+=`<th id="${columncount+1}_0"><div class="createnewcolumnbutton" onclick="createnewcolumn()">+</div></th>`;
+			for (let i=1;i<=linecount;i++){
+				document.getElementById("0_"+i).innerHTML+="<td>"+columncount+i+"</td>";
+				alllines[i-1].push("new");
+
+
+			}
+		}
+
+
+
+	</script>
+</head>
+<body>
+	<div class="bod">
+		<table>
+			<tr id="0_0"><th id="1_0">1столбец</th><th id="2_0">2столбец</th><th id="3_0">3столбец</th><th id="4_0"><div class="createnewcolumnbutton" onclick="createnewcolumn()">+</div></th></tr>
+			<tr id="0_1"><td>111</td><td>122</td><td>133</td></tr>
+			<tr id="0_2"><td>222</td><td>222</td><td>333</td></tr>
+
+
+
+		</table>
+
+
+
+	</div>
+	<script type="text/javascript">
+		startwork();
+	</script>
+</body>
+</html>
