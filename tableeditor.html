@@ -4,7 +4,7 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>TableEditor</title>
-	<link rel="shortcut icon" href="https://lh3.google.com/u/0/d/1eXbawcwyH6X_BOVj8hIN5BHluailLIys=w1920-h867-iv1" type="image/png">
+	<link rel="shortcut icon" href="https://lh3.google.com/u/0/d/1YjQRjB_oogSJbmKXDvTKc6pgxi-S7idf=w300-h285-p-k-nu-iv1">
 	<style type="text/css">
 		body{
 		margin-top: 105px;
@@ -43,7 +43,7 @@
 		.bod{
 		width: 70%;
 		margin-left: 20px;
-		margin-top: 10%;
+		margin-top: 5%;
 		font-size: 20px;
 		border-radius: 10px;
 		}
@@ -67,11 +67,87 @@
 		padding: 5px;
 		}
 		.createnewcolumnbutton{
-		width: 10px;
-		height: 10px;
+		width: 30px;
+		height: 30px;
 		background-color: #8f8;
 		color: #fff;
 
+		}
+		.columnmenubutton{
+		width: 20px;
+		height: 30px;
+		background-color: #8f8;
+		color: #fff;
+		}
+		.columnmenu{
+		position: fixed;
+		font-size: 15px;
+		top: 20%;
+		margin: auto;
+		width: 150px;
+		height: 90px;
+		background-color: #8f8;
+		color: #000;
+		border: 4px solid green;
+		border-radius: 10px;
+		}
+		.columnmenusubpart{
+		margin-left: 20px;
+		width: 90px;
+		height: 20px;
+		background-color: #8f8;
+		color: #000;
+		border-bottom: 2px solid green;
+		}
+		.menuopened{
+		position: fixed;
+		font-size: 25px;
+		bottom: 0px;
+		right: 0px;
+		width: 40%;
+		height: 200px;
+		background-color: #8f8;
+		color: #000;
+		border-top: 4px solid green;
+		border-left: 4px solid green;
+		border-radius: 20px 0 0 0;
+		transition: 0.3s ease-out;
+		}
+		.menuclosed{
+		position: fixed;
+		font-size: 25px;
+		bottom: -150px;
+		right: 0px;
+		width: 40%;
+		height: 200px;
+		background-color: #8f8;
+		color: #000;
+		border-top: 4px solid green;
+		border-left: 4px solid green;
+		border-radius: 20px 0 0 0;
+		transition: 0.3s ease-out;
+		}
+		.menuopenclosebutton{
+		font-size: 30px;
+		margin-top: 15px;
+		margin-left: 50px;
+		width: 45px;
+		height: 15px;
+		background-color: #8f8;
+		color: #000;
+		border: 2px solid green;
+		border-radius: 4px;
+		}
+		.menubutton{
+		font-size: 30px;
+		margin-top: 15px;
+		margin-left: 50px;
+		width: 45px;
+		height: 15px;
+		background-color: #8f8;
+		color: #000;
+		border: 2px solid green;
+		border-radius: 4px;
 		}
 	</style>
 	<script type="text/javascript">
@@ -81,28 +157,107 @@
 		let alllines=[["111","122","133"],["211","222","233"]];
 		function startwork(){
 			//thiss=document.getElementById("bod").innerHTML;
+			let thiss="<tr id='0_0'>"
+			for (let i=1;i<=columncount;i++) {
+				thiss+=`<th id=${i}_0>${headers[i-1]}<div class='columnmenubutton' onclick='showcolumnmenu(id)' id="${i}">:</div></th>`
+			}
+			thiss+=`<th id="${columncount+1}_0"><div class="createnewcolumnbutton" onclick="createnewcolumn()">+</div></th></tr>`
+			for (let i=1;i<=linecount;i++) {
+				thiss+="<tr id='0_"+i+"' >"
+				for (let j=1; j<=columncount; j++) {
+					thiss+=`<td id=${j}_${i} onclick='settextmenu(id)'>${alllines[i-1][j-1]}</td>`
+				}
 
+
+				thiss+="</tr>";
+			}
+			thiss+=`<tr id="0_${linecount+1}"><td colspan="${columncount}"><center><div class="createnewcolumnbutton" onclick="createnewline()">+</div></center></td></tr>`
+
+			document.getElementById("table").innerHTML=thiss;
+		}
+		function createnewline(){
+			linecount++;
+			document.getElementById("0_"+linecount).innerHTML=""
+			//"new column name"+"<div class='columnmenubutton' onclick='showcolumnmenu(id)' id='"+columncount+"'>:</div>";
+			alllines.push([]);
+			for (let i=1;i <= columncount; i++){
+				alllines[linecount-1].push("added")
+			}
+			document.getElementById("table").innerHTML+=`<tr><td id="0_${linecount+1}" colspan="${columncount}"><center><div class="createnewcolumnbutton" onclick="createnewline()">+</div></center></td></tr>`;
+			for (let i=1;i<=linecount;i++){
+				document.getElementById("0_"+(linecount)).innerHTML+=`<td id="${i}_${linecount}" onclick='settextmenu(id)'>`+i+linecount+"</td>";
+
+				alllines[linecount-1][i-1]=i+"_"+linecount;
+
+
+			}
 		}
 		function createnewcolumn(){
 			columncount++;
-			document.getElementById(columncount+"_0").innerHTML="new column name";
+			document.getElementById(columncount+"_0").innerHTML="new column name"+"<div class='columnmenubutton' onclick='showcolumnmenu(id)' id='"+columncount+"'>:</div>";
 			headers.push("new column name");
 			document.getElementById("0_0").innerHTML+=`<th id="${columncount+1}_0"><div class="createnewcolumnbutton" onclick="createnewcolumn()">+</div></th>`;
 			for (let i=1;i<=linecount;i++){
-				document.getElementById("0_"+i).innerHTML+="<td>"+columncount+i+"</td>";
+				document.getElementById("0_"+i).innerHTML+=`<td id="${columncount}_${i}" onclick='settextmenu(id)'>`+columncount+i+"</td>";
 				alllines[i-1].push("new");
 
 
 			}
 		}
+		function showcolumnmenu(thissid){
+			let menu=`<div class='columnmenu' id='columnmenu'> <div class='columnmenusubpart' id='${thissid}_0_st' onclick='setcolumnname(id)'>set columnname</div><div class='columnmenusubpart'>set color</div><div class='columnmenusubpart'>set type</div><div class='columnmenusubpart'>set max length</div><div class='columnmenusubpart' onclick="document.getElementById('columnmenu').remove()">close</div> </div>`;
+			document.getElementById("menu").innerHTML=document.getElementById("menu").innerHTML+(menu);
+		}
+		function setcolumnname(thissid) {
+			if (thissid==thissid.replace("_st","")) {
+				thissid=thissid.replace("_b","");
+				thisstext=document.getElementById(thissid+"_t").value;
+				document.getElementById(thissid).innerHTML=thisstext+"<div class='columnmenubutton' onclick='showcolumnmenu(id)' id='"+thissid.replace("_0","")+"'>:</div>";
+				document.getElementById(thissid.replace("_0","")).setAttribute("onclick","showcolumnmenu(id)");
+				headers[thissid.split("_")[0]-1]=thisstext
+			} else {
+				let thisstext=headers[thissid.replace("_0_st","")-1];
+				thissid=thissid.replace("_st","");
+				document.getElementById(thissid+"_st").innerHTML="<textarea id='"+thissid+"_t' cols='30' rows='1' value='"+thisstext+"'>"+thisstext+"</textarea><div onclick='setcolumnname(id)' id='"+thissid+"_b' >enter</div>";
+				document.getElementById(thissid+"_st").setAttribute("onclick","");
+			}
+		}
+		let settingtext=0
+		function settextmenu(thissid){
+			if (settingtext==0){
+				let thisstext=document.getElementById(thissid).innerHTML;
+				document.getElementById(thissid).innerHTML="<textarea id='"+thissid+"_t' cols='30' rows='1' value='fff' value='"+thisstext+"'>"+thisstext+"</textarea><div onclick='settext(id)' id='"+thissid+"_b' >enter</div>";
+				document.getElementById(thissid).setAttribute("onclick","");
+				settingtext=1;
+			} else {
+				settingtext=0;
+			}
+		}
+		function settext(thissid) {
+			if (thissid!=thissid.replace("_b","")) {
+				thissid=thissid.replace("_b","");
+				thisstext=document.getElementById(thissid+"_t").value;
+				document.getElementById(thissid).innerHTML=thisstext;
+				alllines[thissid.split("_")[1]-1][thissid.split("_")[0]-1]=thisstext
+				document.getElementById(thissid).setAttribute("onclick","settextmenu(id)");
+				settingtext=2;
+			} else {
+				settextmenu(thissid);
+			}
+		}
+		function openmenu(){
+			if (document.getElementById("menu").className=="menuopened") {
+				document.getElementById("menu").className="menuclosed"
+			} else {
+				document.getElementById("menu").className="menuopened"
+			}
 
-
-
+		}
 	</script>
 </head>
 <body>
-	<div class="bod">
-		<table>
+	<div class="bod" id="bod">
+		<table id="table">
 			<tr id="0_0"><th id="1_0">1столбец</th><th id="2_0">2столбец</th><th id="3_0">3столбец</th><th id="4_0"><div class="createnewcolumnbutton" onclick="createnewcolumn()">+</div></th></tr>
 			<tr id="0_1"><td>111</td><td>122</td><td>133</td></tr>
 			<tr id="0_2"><td>222</td><td>222</td><td>333</td></tr>
@@ -114,6 +269,7 @@
 
 
 	</div>
+	<div class="menuopened" id="menu"><div class="menuopenclosebutton" onclick="openmenu()">--</div><br>обьекты не выбраны<br><div class="menuopenclosebutton" onclick="startwork()">restart</div></div>
 	<script type="text/javascript">
 		startwork();
 	</script>
