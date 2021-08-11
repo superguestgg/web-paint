@@ -11,6 +11,15 @@
 		padding: 0px;
 		font-size: 0px;
 		}
+		a{
+		text-decoration: none;
+		color: #000;
+		}
+		a:hover{
+		text-decoration: underline;
+		color: #fff;
+		transition: 0.2s linear;
+		}
 		p{
 		font-size: 15px;
 		text-align: center;
@@ -48,22 +57,22 @@
 		border-radius: 10px;
 		}
 		table{
-		background-color: #88f;
+		background-color: #b2b2fc;
 		font-size: 25px;
 		border-radius: 10px;
-		border: 5px solid blue;
+		border: 5px solid #3333ff;
 		border-collapse: collapse;
 		padding: 5px;
 		}
 		th{
 		font-size: 30px;
-		border: 2px solid blue;
-		border-bottom: 8px solid black;
-		padding: 10px;
+		border: 2px solid #776eff;
+		border-bottom: 7px solid #6666ff;
+		padding: 8px;
 		}
 		td{
-		border: 2px solid grey;
-		border-right: 4px solid black;
+		border: 2px solid #776eff;
+		border-right: 5px solid #6666ff;
 		padding: 5px;
 		}
 		.createnewcolumnbutton{
@@ -71,33 +80,63 @@
 		height: 30px;
 		background-color: #8f8;
 		color: #fff;
+		transition: 0.3s ease-in-out;
+
+		}
+		.createnewcolumnbutton:hover{
+		width: 30px;
+		height: 30px;
+		background-color: #0f0;
+		color: #fff;
+		transition: 0.3s ease-in-out;
 
 		}
 		.columnmenubutton{
 		width: 20px;
-		height: 30px;
+		height: 33px;
 		background-color: #8f8;
 		color: #fff;
+		transition: 0.3s ease-in-out;
+
+		}
+		.columnmenubutton:hover{
+		width: 20px;
+		height: 33px;
+		background-color: #0f0;
+		color: #fff;
+		transition: 0.3s ease-in-out;
+
 		}
 		.columnmenu{
 		position: fixed;
 		font-size: 15px;
 		top: 20%;
 		margin: auto;
-		width: 150px;
-		height: 90px;
-		background-color: #8f8;
+		width: 170px;
+		height: 120px;
+		background-color: #cfffcf;
 		color: #000;
 		border: 4px solid green;
 		border-radius: 10px;
 		}
 		.columnmenusubpart{
 		margin-left: 20px;
-		width: 90px;
+		width: 130px;
+		height: 20px;
+		background-color: #cfffcf;
+		color: #000;
+		border-bottom: 2px solid green;
+		transition: 0.3s ease-in-out;
+
+		}
+		.columnmenusubpart:hover{
+		margin-left: 20px;
+		width: 130px;
 		height: 20px;
 		background-color: #8f8;
 		color: #000;
 		border-bottom: 2px solid green;
+		transition: 0.3s ease-in-out;
 		}
 		.menuopened{
 		position: fixed;
@@ -105,8 +144,8 @@
 		bottom: 0px;
 		right: 0px;
 		width: 40%;
-		height: 200px;
-		background-color: #8f8;
+		height: 100%;
+		background-color: #cfffcf;
 		color: #000;
 		border-top: 4px solid green;
 		border-left: 4px solid green;
@@ -116,11 +155,11 @@
 		.menuclosed{
 		position: fixed;
 		font-size: 25px;
-		bottom: -150px;
+		bottom: calc(-100% + 50px);
 		right: 0px;
 		width: 40%;
-		height: 200px;
-		background-color: #8f8;
+		height: 100%;
+		background-color: #cfffcf;
 		color: #000;
 		border-top: 4px solid green;
 		border-left: 4px solid green;
@@ -128,26 +167,87 @@
 		transition: 0.3s ease-out;
 		}
 		.menuopenclosebutton{
-		font-size: 30px;
+		font-size: 15px;
 		margin-top: 15px;
-		margin-left: 50px;
-		width: 45px;
+		margin-left: 25px;
+		width: calc(100% - 50px);
 		height: 15px;
 		background-color: #8f8;
 		color: #000;
 		border: 2px solid green;
 		border-radius: 4px;
+		text-align: center;
 		}
 		.menubutton{
 		font-size: 30px;
+		padding: 4px;
 		margin-top: 15px;
-		margin-left: 50px;
-		width: 45px;
-		height: 15px;
+		margin-left: 25px;
+		width: calc(100% - 50px);
+		height: 30px;
+		background-color: #ccffcc;
+		color: #000;
+		border: 2px solid green;
+		border-radius: 4px;
+		transition: 0.3s ease-in-out;
+		z-index: 2000;
+		}
+		.menubutton:hover{
+		font-size: 30px;
+		padding: 4px;
+		margin-top: 15px;
+		margin-left: 25px;
+		width: calc(100% - 50px);
+		height: 30px;
 		background-color: #8f8;
 		color: #000;
 		border: 2px solid green;
 		border-radius: 4px;
+		transition: 0.3s ease-in-out;
+		z-index: 2000;
+
+		}
+		.bigmenu{
+		position: fixed;
+		transition: 0.3s ease-in-out;
+		font-size: 30px;
+		padding: 15px;
+		top: 15px;
+		left: 15px;
+		width: calc(100% - 30px);
+		height: calc(100% - 30px);
+		background-color: #8f8;
+		color: #000;
+		border: 3px solid green;
+		border-radius: 10px;
+		z-index: 2000;
+	
+		}
+		.exitbutton{
+		position: fixed;
+		transition: 0.3s ease-in-out;
+		font-size: 30px;
+		padding: 15px;
+		top: 0px;
+		left: 0px;
+		width: 100%;
+		height: 100%;
+		background-color: #000;
+		opacity: 0.5;
+		color: #fff;
+		z-index: -1;
+
+		}
+		.invisibleclass{
+		position: fixed;
+		width: 0px;
+		height: 0px;
+		top: 50%;
+		left: 50%;
+		transition: 0.3s ease-in-out;
+		z-index: -1;
+
+
 		}
 	</style>
 	<script type="text/javascript">
@@ -157,7 +257,9 @@
 		let alllines=[["111","122","133"],["211","222","233"]];
 		function startwork(){
 			//thiss=document.getElementById("bod").innerHTML;
-			let thiss="<tr id='0_0'>"
+			columncount=(headers).length;
+			linecount=(alllines).length;
+			let thiss="<tr id='0_0'>";
 			for (let i=1;i<=columncount;i++) {
 				thiss+=`<th id=${i}_0>${headers[i-1]}<div class='columnmenubutton' onclick='showcolumnmenu(id)' id="${i}">:</div></th>`
 			}
@@ -184,7 +286,7 @@
 				alllines[linecount-1].push("added")
 			}
 			document.getElementById("table").innerHTML+=`<tr><td id="0_${linecount+1}" colspan="${columncount}"><center><div class="createnewcolumnbutton" onclick="createnewline()">+</div></center></td></tr>`;
-			for (let i=1;i<=linecount;i++){
+			for (let i=1;i<=columncount;i++){
 				document.getElementById("0_"+(linecount)).innerHTML+=`<td id="${i}_${linecount}" onclick='settextmenu(id)'>`+i+linecount+"</td>";
 
 				alllines[linecount-1][i-1]=i+"_"+linecount;
@@ -247,11 +349,108 @@
 		}
 		function openmenu(){
 			if (document.getElementById("menu").className=="menuopened") {
-				document.getElementById("menu").className="menuclosed"
+				document.getElementById("menu").className="menuclosed";
+				document.getElementById("menuopenclosebutton").innerHTML=" o p e n  m e n u "
 			} else {
-				document.getElementById("menu").className="menuopened"
+				document.getElementById("menu").className="menuopened";
+				document.getElementById("menuopenclosebutton").innerHTML=" c l o s e  m e n u "
+
 			}
 
+		}
+		function translatefromsqlite3menu(){
+			if (document.getElementById("translatefromsqlite3menu").className=="menubutton") {
+				document.getElementById("invisible").className="exitbutton";
+				document.getElementById("translatefromsqlite3menu").className="bigmenu";
+				document.getElementById("invisible").setAttribute("onclick", "translatefromsqlite3menu()");
+				document.getElementById("translatefromsqlite3menu").setAttribute("onclick", "none")
+				let thissnewtext= `<br> <textarea name="translatefromsqlite3textarea" id="translatefromsqlite3textarea" cols="30" rows="10"></textarea><br><div class='columnmenusubpart' onclick='translatefromsqlite3()'>translate</div> <br> <div class='columnmenusubpart' onclick='translatefromsqlite3menu()'>exit</div>`;
+				document.getElementById("translatefromsqlite3menu").innerHTML+=thissnewtext;
+			} else {
+				document.getElementById("translatefromsqlite3menu").className="menubutton";
+				document.getElementById("invisible").className="invisibleclass";
+				document.getElementById("invisible").setAttribute("onclick", "none");
+				document.getElementById("translatefromsqlite3menu").innerHTML="translate from SQLite3";
+				document.getElementById("translatefromsqlite3menu").setAttribute("onclick", "translatefromsqlite3menu()")
+
+			}
+		}
+		function translatetosqlite3menu(){
+			if (document.getElementById("translatetosqlite3menu").className=="menubutton") {
+				document.getElementById("invisible").className="exitbutton";
+
+				document.getElementById("translatetosqlite3menu").className="bigmenu";
+				document.getElementById("invisible").setAttribute("onclick", "translatetosqlite3menu()");
+				document.getElementById("translatetosqlite3menu").setAttribute("onclick", "none")
+				let thissnewtext= `<br> <textarea name="translatefromsqlite3textarea" id="translatetosqlite3textarea" cols="30" rows="10"></textarea><br><div class='columnmenusubpart' onclick='translatetosqlite3()'>translate</div> <br> <div class='columnmenusubpart' onclick='translatetosqlite3menu()'>exit</div>`;
+				document.getElementById("translatetosqlite3menu").innerHTML+=thissnewtext;
+			} else {
+				document.getElementById("translatetosqlite3menu").className="menubutton";
+				document.getElementById("invisible").className="invisibleclass";
+				document.getElementById("invisible").setAttribute("onclick", "none");
+				document.getElementById("translatetosqlite3menu").innerHTML="translate to SQLite3"
+				document.getElementById("translatetosqlite3menu").setAttribute("onclick", "translatetosqlite3menu()")
+
+			}
+			let returnthis="create table if not exists table1("
+			for (let i = 0;i<columncount;i++){
+				returnthis+=headers[i]+" text";
+				if (i<columncount-1) {
+					returnthis+=", ";
+				}
+			}
+			returnthis+=`);`
+			for (let i = 0;i<linecount;i++){
+				returnthis+=`
+				insert into table1 values(`;
+				for (let j=0; j<columncount;j++) {
+					returnthis+=alllines[i][j];
+					if (j!=columncount-1){
+						returnthis+=", "
+					}
+				}
+				returnthis+=");"
+			}
+			document.getElementById("translatetosqlite3textarea").value=returnthis;
+			document.getElementById("translatetosqlite3textarea").innerHTML=returnthis;
+		}
+		function translatefromsqlite3() {
+			let thisstext=document.getElementById("translatefromsqlite3textarea").value;
+			let bracketcount=0;
+			let bracketnow=0;
+			thisstext.replace("create table","");
+			thisstext.replace(" if not exists","");
+			let tablename="";
+			let tableheaders="";
+			let tablealllines=""
+
+			for (let i=0;i<=(thisstext).length;i++){
+				if (thisstext[i]=="(") {
+					(bracketcount+=1)
+					bracketnow+=1;
+				} else if (thisstext[i]==")") {
+					bracketcount+=1;
+					bracketnow-=1;
+				}
+				if (bracketnow==0 && bracketcount==0) {
+					tablename+=thisstext[i];
+				} else if (bracketnow==1 && bracketcount==1) {
+					tableheaders+=thisstext[i];
+				} else if (bracketnow==1 && bracketcount>=3 || thisstext[i]=="(" && bracketnow==1 && bracketcount>=3 || thisstext[i]==")" && bracketnow==0 && bracketcount>=4) {
+					tableheaders+=thisstext[i];
+				}
+
+			}
+			tableheaders=tableheaders.split(",");
+			for (let i=0; i<=tableheaders.length;i++) {
+				//tableheaders[i]= tableheaders[i].split(" ")
+			}
+			tablealllines=tablealllines.split(")(");
+			for (let i=0; i<=(tablealllines).length;i++) {
+				tablealllines[i]= tablealllines[i].split(", ")
+			}
+			alllines=tablealllines;
+			headers=tableheaders;
 		}
 	</script>
 </head>
@@ -269,9 +468,17 @@
 
 
 	</div>
-	<div class="menuopened" id="menu"><div class="menuopenclosebutton" onclick="openmenu()">--</div><br>обьекты не выбраны<br><div class="menuopenclosebutton" onclick="startwork()">restart</div></div>
+	<div class="menuopened" id="menu"><div class="menuopenclosebutton" id="menuopenclosebutton" onclick="openmenu()"> c l o s e  m e n u </div><br>обьекты не выбраны<br>
+	<div class="menubutton" onclick="startwork()">restart</div><br>
+	<div class="menubutton" onclick="translatetosqlite3menu()" id="translatetosqlite3menu">translate to SQLite3</div><br>
+	<div class="menubutton" onclick="translatefromsqlite3menu()" id="translatefromsqlite3menu">translate from SQLite3</div><br>
+	<div class="menubutton"><a href="https://superguestgg.github.io/me">main page</a></div><br>
+
+
+</div>
 	<script type="text/javascript">
 		startwork();
 	</script>
+	<div class="invisibleclass" id="invisible"></div>
 </body>
 </html>
