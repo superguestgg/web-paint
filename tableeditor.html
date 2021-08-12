@@ -64,14 +64,50 @@
 		border-collapse: collapse;
 		padding: 5px;
 		}
+		caption{
+		font-size: 30px;
+		background-color: #b2b2fc;
+		border: 2px solid #776eff;
+		border-top: 7px solid #6666ff;
+		padding: 10px;
+		transition: 0.3s ease-in-out;
+		border-radius: 10px 10px 0 0;
+		}
+		caption:hover{
+		font-size: 30px;
+		background-color: #c3c3ff;
+		border: 2px solid #3333ff;
+		border-top: 7px solid #3333ff;
+		padding: 10px;
+		transition: 0.3s ease-in-out;
+		border-radius: 0;
+		}
 		th{
 		font-size: 30px;
 		border: 2px solid #776eff;
+		background-color: #b2b2fc;
 		border-bottom: 7px solid #6666ff;
 		padding: 8px;
+		transition: 0.3s ease-in-out;
+		}
+		th:hover{
+		font-size: 30px;
+		border: 2px solid #776eff;
+		background-color: #c3c3ff;
+		border-bottom: 7px solid #6666ff;
+		padding: 8px;
+		transition: 0.3s ease-in-out;
 		}
 		td{
+		background-color: #b2b2fc;
 		border: 2px solid #776eff;
+		border-right: 5px solid #6666ff;
+		padding: 5px;
+		transition: 0.3s ease-in-out;
+		}
+		td:hover{
+		background-color: #c3c3ff;
+		border: 2px solid #554cff;
 		border-right: 5px solid #6666ff;
 		padding: 5px;
 		}
@@ -81,6 +117,7 @@
 		background-color: #8f8;
 		color: #fff;
 		transition: 0.3s ease-in-out;
+		border-radius: 0 10px 0 10px;
 
 		}
 		.createnewcolumnbutton:hover{
@@ -89,7 +126,8 @@
 		background-color: #0f0;
 		color: #fff;
 		transition: 0.3s ease-in-out;
-
+		border-radius: 0px;
+		cursor: cell;
 		}
 		.columnmenubutton{
 		width: 20px;
@@ -97,7 +135,7 @@
 		background-color: #8f8;
 		color: #fff;
 		transition: 0.3s ease-in-out;
-
+		border-radius: 0 10px 0 10px;
 		}
 		.columnmenubutton:hover{
 		width: 20px;
@@ -105,12 +143,32 @@
 		background-color: #0f0;
 		color: #fff;
 		transition: 0.3s ease-in-out;
+		border-radius: 0px;
 
+		}
+		.deletethisline{
+		width: 30px;
+		height: 30px;
+		background-color: #f88;
+		color: #fff;
+		transition: 0.3s ease-in-out;
+		border-radius: 20px;
+		text-align: center;
+		}
+		.deletethisline:hover{
+		width: 30px;
+		height: 30px;
+		background-color: #f00;
+		color: #fff;
+		transition: 0.3s ease-in-out;
+		border-radius: 0px;
+		text-align: center;
 		}
 		.columnmenu{
 		position: fixed;
 		font-size: 15px;
 		top: 20%;
+		left: 20%;
 		margin: auto;
 		width: 170px;
 		height: 120px;
@@ -177,6 +235,22 @@
 		border: 2px solid green;
 		border-radius: 4px;
 		text-align: center;
+		transition: 0.3s ease-in-out;
+
+		}
+		.menuopenclosebutton:hover{
+		font-size: 15px;
+		margin-top: 15px;
+		margin-left: 15px;
+		width: calc(100% - 30px);
+		height: 15px;
+		background-color: #4f4;
+		color: #000;
+		border: 2px solid green;
+		border-radius: 4px;
+		text-align: center;
+		transition: 0.3s ease-in-out;
+
 		}
 		.menubutton{
 		font-size: 30px;
@@ -191,13 +265,14 @@
 		border-radius: 4px;
 		transition: 0.3s ease-in-out;
 		z-index: 2000;
+		cursor: pointer;
 		}
 		.menubutton:hover{
 		font-size: 30px;
 		padding: 4px;
 		margin-top: 15px;
-		margin-left: 25px;
-		width: calc(100% - 50px);
+		margin-left: 15px;
+		width: calc(100% - 30px);
 		height: 30px;
 		background-color: #8f8;
 		color: #000;
@@ -205,6 +280,7 @@
 		border-radius: 4px;
 		transition: 0.3s ease-in-out;
 		z-index: 2000;
+		cursor: pointer;
 
 		}
 		.bigmenu{
@@ -251,6 +327,7 @@
 		}
 	</style>
 	<script type="text/javascript">
+		let nameoftable="table1";
 		let columncount=3;
 		let linecount=2;
 		let headers=["1столбец","2столбец","3столбец"];
@@ -259,7 +336,7 @@
 			//thiss=document.getElementById("bod").innerHTML;
 			columncount=(headers).length;
 			linecount=(alllines).length;
-			let thiss="<tr id='0_0'>";
+			let thiss="<caption>"+nameoftable+"</caption><tr id='0_0'>";
 			for (let i=1;i<=columncount;i++) {
 				thiss+=`<th id=${i}_0>${headers[i-1]}<div class='columnmenubutton' onclick='showcolumnmenu(id)' id="${i}">:</div></th>`
 			}
@@ -271,11 +348,18 @@
 				}
 
 
-				thiss+="</tr>";
+				thiss+=`<td><div class='deletethisline' id="${i}" onclick='deletethisline(id)'>-</div></td></tr>`;
+
 			}
 			thiss+=`<tr id="0_${linecount+1}"><td colspan="${columncount}"><center><div class="createnewcolumnbutton" onclick="createnewline()">+</div></center></td></tr>`
 
 			document.getElementById("table").innerHTML=thiss;
+		}
+
+
+		function deletethisline(thissid){
+			document.getElementById("0_"+thissid).remove();
+			alllines.splice(thissid-1,1);
 		}
 		function createnewline(){
 			linecount++;
@@ -293,6 +377,7 @@
 
 
 			}
+			document.getElementById("0_"+(linecount)).innerHTML+=`<td><div class='deletethisline' id="${linecount}" onclick='deletethisline(id)'>-</div></td>`
 		}
 		function createnewcolumn(){
 			columncount++;
@@ -360,16 +445,18 @@
 		}
 		function translatefromsqlite3menu(){
 			if (document.getElementById("translatefromsqlite3menu").className=="menubutton") {
+				//open menu
 				document.getElementById("invisible").className="exitbutton";
 				document.getElementById("translatefromsqlite3menu").className="bigmenu";
 				document.getElementById("invisible").setAttribute("onclick", "translatefromsqlite3menu()");
-				document.getElementById("translatefromsqlite3menu").setAttribute("onclick", "none")
-				let thissnewtext= `<br> <textarea name="translatefromsqlite3textarea" id="translatefromsqlite3textarea" cols="30" rows="10"></textarea><br><div class='columnmenusubpart' onclick='translatefromsqlite3()'>translate</div> <br> <div class='columnmenusubpart' onclick='translatefromsqlite3menu()'>exit</div>`;
+				document.getElementById("translatefromsqlite3menu").setAttribute("onclick", "startwork()")
+				let thissnewtext= `<br> <textarea name="translatefromsqlite3textarea" id="translatefromsqlite3textarea" cols="60" rows="10"></textarea><br><div class='columnmenusubpart' onclick='translatefromsqlite3()'>translate</div> <br> <div class='columnmenusubpart' onclick='translatefromsqlite3menu()'>exit</div>`;
 				document.getElementById("translatefromsqlite3menu").innerHTML+=thissnewtext;
 			} else {
+				//close menu
 				document.getElementById("translatefromsqlite3menu").className="menubutton";
 				document.getElementById("invisible").className="invisibleclass";
-				document.getElementById("invisible").setAttribute("onclick", "none");
+				document.getElementById("invisible").setAttribute("onclick", "");
 				document.getElementById("translatefromsqlite3menu").innerHTML="translate from SQLite3";
 				document.getElementById("translatefromsqlite3menu").setAttribute("onclick", "translatefromsqlite3menu()")
 
@@ -377,17 +464,19 @@
 		}
 		function translatetosqlite3menu(){
 			if (document.getElementById("translatetosqlite3menu").className=="menubutton") {
+				//open menu
 				document.getElementById("invisible").className="exitbutton";
 
 				document.getElementById("translatetosqlite3menu").className="bigmenu";
 				document.getElementById("invisible").setAttribute("onclick", "translatetosqlite3menu()");
-				document.getElementById("translatetosqlite3menu").setAttribute("onclick", "none")
-				let thissnewtext= `<br> <textarea name="translatefromsqlite3textarea" id="translatetosqlite3textarea" cols="30" rows="10"></textarea><br><div class='columnmenusubpart' onclick='translatetosqlite3()'>translate</div> <br> <div class='columnmenusubpart' onclick='translatetosqlite3menu()'>exit</div>`;
+				document.getElementById("translatetosqlite3menu").setAttribute("onclick", "startwork()")
+				let thissnewtext= `<br> <textarea name="translatefromsqlite3textarea" id="translatetosqlite3textarea" cols="60" rows="10"></textarea><br><div class='columnmenusubpart' onclick='translatetosqlite3()'>translate</div> <br> <div class='columnmenusubpart' onclick='translatetosqlite3menu()'>exit</div>`;
 				document.getElementById("translatetosqlite3menu").innerHTML+=thissnewtext;
 			} else {
+				//close menu
 				document.getElementById("translatetosqlite3menu").className="menubutton";
 				document.getElementById("invisible").className="invisibleclass";
-				document.getElementById("invisible").setAttribute("onclick", "none");
+				document.getElementById("invisible").setAttribute("onclick", "");
 				document.getElementById("translatetosqlite3menu").innerHTML="translate to SQLite3"
 				document.getElementById("translatetosqlite3menu").setAttribute("onclick", "translatetosqlite3menu()")
 
@@ -402,7 +491,7 @@
 			returnthis+=`);`
 			for (let i = 0;i<linecount;i++){
 				returnthis+=`
-				insert into table1 values(`;
+insert into table1 values(`;
 				for (let j=0; j<columncount;j++) {
 					returnthis+=alllines[i][j];
 					if (j!=columncount-1){
@@ -418,45 +507,43 @@
 			let thisstext=document.getElementById("translatefromsqlite3textarea").value;
 			let bracketcount=0;
 			let bracketnow=0;
-			thisstext.replace("create table","");
-			thisstext.replace(" if not exists","");
+			thisstext=thisstext.replace("if not exists ","",99);
+			thisstext=thisstext.replace("create table ","",99);
 			let tablename="";
 			let tableheaders="";
-			let tablealllines=""
-
-			for (let i=0;i<=(thisstext).length;i++){
-				if (thisstext[i]=="(") {
-					(bracketcount+=1)
-					bracketnow+=1;
-				} else if (thisstext[i]==")") {
-					bracketcount+=1;
-					bracketnow-=1;
-				}
-				if (bracketnow==0 && bracketcount==0) {
-					tablename+=thisstext[i];
-				} else if (bracketnow==1 && bracketcount==1) {
-					tableheaders+=thisstext[i];
-				} else if (bracketnow==1 && bracketcount>=3 || thisstext[i]=="(" && bracketnow==1 && bracketcount>=3 || thisstext[i]==")" && bracketnow==0 && bracketcount>=4) {
-					tableheaders+=thisstext[i];
-				}
-
-			}
-			tableheaders=tableheaders.split(",");
-			for (let i=0; i<=tableheaders.length;i++) {
+			let tablealllines=[];
+			thisstext=thisstext.split(";");
+			tableheaders=thisstext[0].split(",");
+			tablename=tableheaders[0].split("(")[0];
+			tableheaders[0]=tableheaders[0].split("(")[1];
+			
+			for (let i=0; i<tableheaders.length;i++) {
 				//tableheaders[i]= tableheaders[i].split(" ")
 			}
-			tablealllines=tablealllines.split(")(");
+			for (let i=1;i<(thisstext).length;i++){
+				thisstext[i]=thisstext[i].replace("insert into table1 values(", "").replace(")","")
+				thisstext[i]=thisstext[i].split(",")
+				tablealllines.push(thisstext[i]);
+
+			}
+
 			for (let i=0; i<=(tablealllines).length;i++) {
-				tablealllines[i]= tablealllines[i].split(", ")
+				//tablealllines[i]= tablealllines[i].split(", ")
 			}
 			alllines=tablealllines;
 			headers=tableheaders;
+			nameoftable=tablename;
+			startwork();
+		}
+		function showalltables(){
+
 		}
 	</script>
 </head>
 <body>
 	<div class="bod" id="bod">
 		<table id="table">
+			<caption>table1</caption>
 			<tr id="0_0"><th id="1_0">1столбец</th><th id="2_0">2столбец</th><th id="3_0">3столбец</th><th id="4_0"><div class="createnewcolumnbutton" onclick="createnewcolumn()">+</div></th></tr>
 			<tr id="0_1"><td>111</td><td>122</td><td>133</td></tr>
 			<tr id="0_2"><td>222</td><td>222</td><td>333</td></tr>
@@ -472,6 +559,7 @@
 	<div class="menubutton" onclick="startwork()">restart</div><br>
 	<div class="menubutton" onclick="translatetosqlite3menu()" id="translatetosqlite3menu">translate to SQLite3</div><br>
 	<div class="menubutton" onclick="translatefromsqlite3menu()" id="translatefromsqlite3menu">translate from SQLite3</div><br>
+	<div class="menubutton"  onclick="showalltables()">show all tables</div><br>
 	<div class="menubutton"><a href="https://superguestgg.github.io/me">main page</a></div><br>
 
 
