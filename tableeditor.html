@@ -71,7 +71,7 @@
 		border-top: 7px solid #6666ff;
 		padding: 10px;
 		transition: 0.3s ease-in-out;
-		border-radius: 10px 10px 0 0;
+		border-radius: 15px 15px 0 0;
 		}
 		caption:hover{
 		font-size: 30px;
@@ -171,7 +171,7 @@
 		left: 20%;
 		margin: auto;
 		width: 170px;
-		height: 120px;
+		height: 140px;
 		background-color: #cfffcf;
 		color: #000;
 		border: 4px solid green;
@@ -314,6 +314,21 @@
 		z-index: -1;
 
 		}
+		.commandline{
+		position: fixed;
+		transition: 0.3s ease-in-out;
+		font-size: 25px;
+		padding: 15px;
+		top: 15px;
+		left: 15px;
+		width: calc(100% - 30px);
+		height: calc(100% - 30px);
+		background-color: #333;
+		color: #fff;
+		border: 3px solid #000;
+		border-radius: 10px;
+		z-index: 2000;	
+		}
 		.invisibleclass{
 		position: fixed;
 		width: 0px;
@@ -355,7 +370,29 @@
 
 			document.getElementById("table").innerHTML=thiss;
 		}
+		function showtablefromcommand(headersthis,linesthis){
+			//thiss=document.getElementById("bod").innerHTML;
+			columncount=(headersthis).length;
+			linecount=(linesthis).length;
+			let thiss="<caption>"+nameoftable+"</caption><tr id='0_0'>";
+			for (let i=1;i<=columncount;i++) {
+				thiss+=`<th id=${i}_0>${headersthis[i-1]}<div class='columnmenubutton' onclick='showcolumnmenu(id)' id="${i}">:</div></th>`
+			}
+			thiss+=`<th id="${columncount+1}_0"><div class="createnewcolumnbutton" onclick="createnewcolumn()">+</div></th></tr>`
+			for (let i=1;i<=linecount;i++) {
+				thiss+="<tr id='0_"+i+"' >"
+				for (let j=1; j<=columncount; j++) {
+					thiss+=`<td id=${j}_${i} onclick='settextmenu(id)'>${linesthis[i-1][j-1]}</td>`
+				}
 
+
+				thiss+=`<td><div class='deletethisline' id="${i}" onclick='deletethisline(id)'>-</div></td></tr>`;
+
+			}
+			thiss+=`<tr id="0_${linecount+1}"><td colspan="${columncount}"><center><div class="createnewcolumnbutton" onclick="createnewline()">+</div></center></td></tr>`
+
+			document.getElementById("table").innerHTML=thiss;
+		}
 
 		function deletethisline(thissid){
 			document.getElementById("0_"+thissid).remove();
@@ -378,11 +415,12 @@
 
 			}
 			document.getElementById("0_"+(linecount)).innerHTML+=`<td><div class='deletethisline' id="${linecount}" onclick='deletethisline(id)'>-</div></td>`
+			startwork();
 		}
 		function createnewcolumn(){
 			columncount++;
-			document.getElementById(columncount+"_0").innerHTML="new column name"+"<div class='columnmenubutton' onclick='showcolumnmenu(id)' id='"+columncount+"'>:</div>";
-			headers.push("new column name");
+			document.getElementById(columncount+"_0").innerHTML="new_column_name"+"<div class='columnmenubutton' onclick='showcolumnmenu(id)' id='"+columncount+"'>:</div>";
+			headers.push("new_column_name");
 			document.getElementById("0_0").innerHTML+=`<th id="${columncount+1}_0"><div class="createnewcolumnbutton" onclick="createnewcolumn()">+</div></th>`;
 			for (let i=1;i<=linecount;i++){
 				document.getElementById("0_"+i).innerHTML+=`<td id="${columncount}_${i}" onclick='settextmenu(id)'>`+columncount+i+"</td>";
@@ -390,9 +428,16 @@
 
 
 			}
+			startwork();
 		}
 		function showcolumnmenu(thissid){
-			let menu=`<div class='columnmenu' id='columnmenu'> <div class='columnmenusubpart' id='${thissid}_0_st' onclick='setcolumnname(id)'>set columnname</div><div class='columnmenusubpart'>set color</div><div class='columnmenusubpart'>set type</div><div class='columnmenusubpart'>set max length</div><div class='columnmenusubpart' onclick="document.getElementById('columnmenu').remove()">close</div> </div>`;
+			let menu=`<div class='columnmenu' id='columnmenu'> 
+			<div class='columnmenusubpart' id='${thissid}_0_st' onclick='setcolumnname(id)'>set columnname</div>
+			<div class='columnmenusubpart'>set color</div>
+			<div class='columnmenusubpart'>set type</div>
+			<div class='columnmenusubpart'>set max length</div>
+			<div class='columnmenusubpart' id="${thissid}_0_d" onclick='deletecolumn(id)'>delete column</div>
+			<div class='columnmenusubpart' onclick="document.getElementById('columnmenu').remove()">close</div> </div>`;
 			document.getElementById("menu").innerHTML=document.getElementById("menu").innerHTML+(menu);
 		}
 		function setcolumnname(thissid) {
@@ -408,6 +453,12 @@
 				document.getElementById(thissid+"_st").innerHTML="<textarea id='"+thissid+"_t' cols='30' rows='1' value='"+thisstext+"'>"+thisstext+"</textarea><div onclick='setcolumnname(id)' id='"+thissid+"_b' >enter</div>";
 				document.getElementById(thissid+"_st").setAttribute("onclick","");
 			}
+		}
+		function deletecolumn(thissid){
+			thissid=thissid.replace("_d","");
+			headers.splice(thissid.replace("_0","")-1,1);
+			startwork();
+			document.getElementById("columnmenu").remove();
 		}
 		let settingtext=0
 		function settextmenu(thissid){
@@ -536,6 +587,69 @@ insert into table1 values(`;
 			startwork();
 		}
 		function showalltables(){
+			alert("function not ready now");
+		}
+		function opensqlite3commandline(){
+			let sqlite3commandline=`<div class="commandline" id="sqlite3commandline"><center>command line</center>
+			<textarea name="sqlite3commandlinetextarea" id="sqlite3commandlinetextarea" cols="60" rows="10" value="select * from table1 where 1столбец = "111"">select * from table1 where 1столбец = "111"</textarea>
+			<div class="columnmenusubpart" onclick="executesqlite3command()">execute</div>
+			<div class="columnmenusubpart" onclick="closesqlite3commandline()">exit</div>
+			</div>`;
+			document.getElementById("menu").innerHTML+=(sqlite3commandline);
+			document.getElementById("invisible").className="exitbutton";
+			document.getElementById("invisible").setAttribute("onclick","closesqlite3commandline()");
+
+		}
+		function closesqlite3commandline(){
+			document.getElementById("sqlite3commandline").remove();
+			document.getElementById("invisible").className="invisibleclass()";
+			document.getElementById("invisible").className="startwork()";
+
+		}
+		function executesqlite3command() {
+			let command=(document.getElementById("sqlite3commandlinetextarea").value).replace(", ",",", 999).split(" ");
+			let columns=command[1];
+			let columnsmassive=columns.split(",")
+			if (columns=="*"){
+				columnsmassive=headers;
+			}
+			let columnname =command[5];
+			let columnnumber=headers.indexOf(columnname);
+			//alert (columnnumber);
+			command[7]=command[7].replace("[","").replace("]","").replace('"','',99).replace('"','',99)
+			massivethis=[]
+			for (let i=0;i<linecount;i++){
+				if (alllines[i][columnnumber]==command[7].replace('"','',99).replace('"','',99) && command[6]=="="){
+					//alert(alllines[i]);
+					let thisline=[]
+					for (let j=0;j<(columnsmassive).length;j++){
+						alert(alllines[i][headers.indexOf(columnsmassive[j])]);
+						thisline.push(`${alllines[i][headers.indexOf(columnsmassive[j])]}`)
+					}
+					alert(thisline);
+					massivethis.push(thisline)
+				}
+				else if ((command[7].replace('"','',99).replace('"','',99).split(",")).filter(x => x == alllines[i][columnnumber]).length>0 && command[6]=="in"){
+					//alert(alllines[i]);
+					let thisline=[]
+					for (let j=0;j<(columnsmassive).length;j++){
+						alert(alllines[i][headers.indexOf(columnsmassive[j])]);
+						thisline.push(`${alllines[i][headers.indexOf(columnsmassive[j])]}`)
+					}
+					alert(thisline);
+					massivethis.push(thisline)
+				}
+				//alert(alllines[i][columnnumber])
+				//alert(command[7].replace('"','',99).replace('"','',99))
+			}
+			if (columns=="*"){
+				columns=headers;
+
+			} else {
+				columns=columns.split(",")
+			}
+			showtablefromcommand(columns,massivethis)
+			//select * from table1 where 1столбец = "111"
 
 		}
 	</script>
@@ -555,11 +669,12 @@ insert into table1 values(`;
 
 
 	</div>
-	<div class="menuopened" id="menu"><div class="menuopenclosebutton" id="menuopenclosebutton" onclick="openmenu()"> c l o s e  m e n u </div><br>обьекты не выбраны<br>
+	<div class="menuopened" id="menu"><div class="menuopenclosebutton" id="menuopenclosebutton" onclick="openmenu()"> c l o s e  m e n u </div><br><br>
 	<div class="menubutton" onclick="startwork()">restart</div><br>
 	<div class="menubutton" onclick="translatetosqlite3menu()" id="translatetosqlite3menu">translate to SQLite3</div><br>
 	<div class="menubutton" onclick="translatefromsqlite3menu()" id="translatefromsqlite3menu">translate from SQLite3</div><br>
-	<div class="menubutton"  onclick="showalltables()">show all tables</div><br>
+	<div class="menubutton" onclick="opensqlite3commandline()" id="opensqlite3commandline">open SQLite3 command line</div><br>
+	<div class="menubutton" onclick="showalltables()">show all tables</div><br>
 	<div class="menubutton"><a href="https://superguestgg.github.io/me">main page</a></div><br>
 
 
