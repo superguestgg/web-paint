@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<style type="text/css">
+		.slaidopened{
+			position: fixed;
+			top: 0px;
+			left: 0px;
+			height: 100%;
+			width: 100%;
+			background-image: linear-gradient(to top left, #764, #def);
+			color: #000;
+			font-size: 20px;
+			padding: 30px;
+			padding-top: 50px;
+			transition: 0.3s ease-in-out;
+
+		}
+		.slaidclosed{
+			position: fixed;
+			top: 0px;
+			left: 100%;
+			height: 100%;
+			width: 100%;
+			background-image: linear-gradient(to top left, #764, #def);
+			color: #000;
+			font-size: 20px;
+			padding: 30px;
+			padding-top: 50px;
+			transition: 0.3s ease-in-out;
+
+		}
+		h1{
+		font-size: 40px;
+		color: #432;
+		text-shadow: 10px 10px 3px #543;
+		margin: 40px;
+		}
+		p{
+		font-size: 25px;
+		color: #543;
+		margin: 10px;
+		}
+		.nextbutton{
+	border: 2px solid #543;
+	border-radius: 5px;
+	padding: 5px;
+	font-size: 24px;
+	background-color: #ba9;
+	margin: auto;
+	width: 300px;
+	max-width: calc(100% - 8px);
+	transition: 0.3s ease-in-out;
+	margin-top: 5px;
+	text-align: center;
+	color: #432;
+	}
+ 	.nextbutton:hover{
+	border: 2px solid #543;
+	border-radius: 5px;
+	padding: 5px;
+	font-size: 24px;
+	background-color: #987;
+	margin: auto;
+	width: 300px;
+	max-width: calc(100% - 10px);
+	transition: 0.3s ease-in-out;
+	margin-top: 5px;
+	text-align: center;
+	color: #432;
+		}
+
+
+
+
+	</style>
+	<script type="text/javascript">
+		now=1
+		function next(){
+			document.getElementById(now).className="slaidclosed";
+			now=now+1;
+			document.getElementById(now).className="slaidopened"
+		}
+		function back(){
+			document.getElementById(now).className="slaidclosed";
+			now=now-1;
+			document.getElementById(now).className="slaidopened"
+		}
+	</script>
+	<title>Presentation</title>
+</head>
+<body>
+	<div class="slaidopened" id="1">
+		<h1><center>Какая вообще бывает литература и зачем она нужна:</center></h1>
+		<p>1 научная<br>
+2 публицистическая<br>
+3 художественная(это та что проходится в школе на предмете литература)<br>
+4 документальная<br>
+5 Мемуарная<br>
+6 Справочная<br>
+7 Учебная<br>
+8 Техническая<br>
+9 по саморазвитию<br>
+10 честно я не знаю зачем я добавил этот слайд, он абсолютно бесполезен и вообще не в тему здесь находится</p>
+	<div class="nextbutton" onclick="next()">следующий слайд</div>
+	<div class="nextbutton" onclick="back()">предыдущий слайд</div>
+	</div>
+		<div class="slaidclosed" id="2">
+		<h1><center>Зачем художественная литература для человека?</center></h1>
+		<p>1 ну сюжет там интересный<br>
+2 ну еще типо проблемы какие-то автор раскрывает или что он там делает с ними<br>
+3 ну как жить там узнать, типо сто там в разных ситуациях люди делают ( серьезно, в 19 веке? Нам прям жизненно необходимо знать как ездить на лошадях и отправлять письма по почте)<br>
+4 ну много чего еще там всякого<br>
+5 всякое<br>
+6 тоже всякое</p>
+	<div class="nextbutton" onclick="next()">следующий слайд</div>
+	<div class="nextbutton" onclick="back()">предыдущий слайд</div>
+	</div>
+</body>
+</html>
