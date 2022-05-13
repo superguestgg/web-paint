@@ -9,6 +9,7 @@
 }
 
 		.slaidopened{
+
 			position: fixed;
 			top: 0px;
 			left: 0px;
@@ -22,8 +23,23 @@
 			transition: 0.3s ease-in-out;
 
 		}
-		.slaidclosed{
-			transform: rotate(180deg);
+		.slaidclosedleft{
+			transform: rotate(0deg);
+			position: fixed;
+			top: 0px;
+			left: -100%;
+			height: 100%;
+			width: 100%;
+			background-image: linear-gradient(to top left, #764, #def);
+			color: #000;
+			font-size: 20px;
+			padding: 30px;
+			padding-top: 50px;
+			transition: 0.3s ease-in-out;
+
+		}
+		.slaidclosedright{
+			transform: rotate(90deg);
 			position: fixed;
 			top: 0px;
 			left: 100%;
@@ -117,12 +133,12 @@
 	<script type="text/javascript">
 		now=1
 		function next(){
-			document.getElementById(now).className="slaidclosed";
+			document.getElementById(now).className="slaidclosedleft";
 			now=now+1;
 			document.getElementById(now).className="slaidopened"
 		}
 		function back(){
-			document.getElementById(now).className="slaidclosed";
+			document.getElementById(now).className="slaidclosedright";
 			now=now-1;
 			document.getElementById(now).className="slaidopened"
 		}
@@ -130,14 +146,14 @@
 	<title>Presentation</title>
 </head>
 <body>
-	<div class="slaidoclosed" id="0">
+	<div class="slaidclosedleft" id="0">
 		<h1><center>дисклеймер</center></h1>
 		<p>заранее извиняюсь за качество, все-таки в последний день делал</p>
 	<div class="nextbutton" onclick="next()">следующий слайд</div>
 	<div class="backbutton" onclick="back()">предыдущий слайд</div>
 	</div>
 	<div class="slaidopened" id="1">
-		<h1><center>Какая вообще бывает литература и зачем она нужна:</center></h1>
+		<h1><center>Какая вообще бывает литература</center></h1>
 		<p>1 научная<br>
 2 публицистическая<br>
 3 художественная(это та что проходится в школе на предмете литература)<br>
@@ -151,7 +167,7 @@
 	<div class="nextbutton" onclick="next()">следующий слайд</div>
 	<div class="backbutton" onclick="back()">предыдущий слайд</div>
 	</div>
-		<div class="slaidclosed" id="2">
+		<div class="slaidclosedright" id="2">
 		<h1><center>Зачем художественная литература для человека?</center></h1>
 		<p>1 ну сюжет там интересный<br>
 2 ну еще типо проблемы какие-то автор раскрывает или что он там делает с ними<br>
@@ -165,7 +181,7 @@
 	</div>
 
 
-	<div class="slaidclosed" id="3">
+	<div class="slaidclosedright" id="3">
 		<h1><center>ладно, а теперь реально</center></h1>
 		<p>4 патриотизм там какой-нибудь в военных произведениях<br>
 5 там богатство языка всякое, речевые какие-нибудь обороты, описание дуба на 2 страницы- не каждый может<br>
@@ -173,7 +189,8 @@
 7 ну там интересно посмотреть, какие люди были раньше( а если не интересно)<br>
 8 ну всякие идеальные миры там, типо шо делать, как нам строить мир<br>
 9 ну там всякие полезные качества воспитывает<br>
-10 ну ладно, я рофлил, действительно, смыслов читать художественную литературу больше, просто из сложно все вспомнить</p>
+10 все читают, чем я хуже<br>
+11 ну ладно, я рофлил, действительно, смыслов читать художественную литературу больше, просто из сложно все вспомнить</p>
 
 	<div class="nextbutton" onclick="next()">следующий слайд</div>
 	<div class="backbutton" onclick="back()">предыдущий слайд</div>
@@ -185,7 +202,7 @@
 
 
 
-		<div class="slaidclosed" id="4">
+		<div class="slaidclosedright" id="4">
 		<h1><center>А теперь почему она не нужна(контраргументы типо) </center></h1>
 		<h1><center> интересный	сюжет	</center></h1>
 		<p>если хочется чего-то интересного, то фильмы легко заменяют книги: эффектнее смотрятся, занимают меньше времени, а по тому, как захватывает сюжет, не уступают им. Аналогично можно сказать про атмосферу в произведении. <br><br>
@@ -199,7 +216,7 @@
 
 
 
-		<div class="slaidclosed" id="5">
+		<div class="slaidclosedright" id="5">
 		<h1><center>проблемы жизни, вопросы там всякие</center></h1>
 		<p>лучше подойдет научная литература. Хотя действительно многим станет лень читать читать чисто полезную информацию, уже обработанную, а в книге проблема перемешана с интересным сюжетом( фильм подойдет хуже, человек за время просмотра (2 часа) н.... Не поймёт и не подумает над проблемой)<br>
 Минусы:
@@ -218,7 +235,7 @@
 
 
 
-		<div class="slaidclosed" id="6">
+		<div class="slaidclosedright" id="6">
 		<h1><center>"ну как жить там узнать, типо что там в разных ситуациях люди делают"</center></h1>
 		<p>тупые вопросы дают нам право не отвечать на них<br>
 Ну а вообще, кто сказал, что персонажи книг априори правы и идеальны, даже если автор из создавал как полностью положительных героев. Никто не гарантирует правоту автора. Лучше учиться либо у себя, либо у реальных людей, а не выдуманных персонажей живущих в искажённом мире(автор не настолько преисполнился в своем сознании, чтобы знать поведение окружающих людей и ход событий).<br>
@@ -233,7 +250,7 @@
 
 
 
-		<div class="slaidclosed" id="7">
+		<div class="slaidclosedright" id="7">
 		<h1><center>Рубрика быстрые ответы</center></h1>
 		<p>4)надо нам или государству?(про патриотизм)<br>
 5) хз, вроде прочитал 3 тома войны и мира и ничего в моей речи не изменилось(про богатство языка)</p>
@@ -247,7 +264,7 @@
 
 
 
-		<div class="slaidclosed" id="8">
+		<div class="slaidclosedright" id="8">
 		<h1><center>ну там интересно посмотреть, какие люди были раньше</center></h1>
 		<p>может кому-то и интересно, но вообще это довольно бесполезное занятие.<br> Пусть читают те, кому интересно</p>
 
@@ -259,7 +276,7 @@
 
 
 
-		<div class="slaidclosed" id="9">
+		<div class="slaidclosedright" id="9">
 		<h1><center>предупреждение проблем</center></h1>
 		<p>что самое интересное вся классическая литература не попадает под этот критерий, хотя он действительно рабочий (возразить нечего). Однако умным людям и так понятны эти опасности, в отличии от способов им противостоять.
 что сказать, читайте антиутопии, они походу единственные несут хоть немного смысла( фильмы есть не по всем антиутопиям
@@ -273,14 +290,20 @@
 
 
 
-		<div class="slaidclosed" id="10">
-		<h1><center></center></h1>
-		<p></p>
+		<div class="slaidclosedright" id="10">
+		<h1><center>все читают, чем я хуже</center></h1>
+		<p>а что все читают?(здесь могли быть самые популярные произведения)</p>
 
 	<div class="nextbutton" onclick="next()">следующий слайд</div>
 	<div class="backbutton" onclick="back()">предыдущий слайд</div>
 	</div>
 
-	
+	<div class="slaidclosedright" id="11">
+		<h1><center>все!!!</center></h1>
+		<p>всем спасибо за внимание</p>
+
+	<div class="nextbutton" onclick="next()">следующий слайд</div>
+	<div class="backbutton" onclick="back()">предыдущий слайд</div>
+	</div>
 </body>
 </html>
